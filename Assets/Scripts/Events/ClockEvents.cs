@@ -1,20 +1,23 @@
-﻿using UnityEngine.Events;
+﻿using Enum;
+using UnityEngine.Events;
 
 namespace Events
 {
     public static class ClockEvents
     {
-        public static readonly StartClockEvent StartClockEvent = new StartClockEvent();
+        public static readonly ConfigureClockEvent ConfigureClockEvent = new ConfigureClockEvent();
+        public static readonly ChangePlayerEvent ChangePlayerEvent = new ChangePlayerEvent();
     }
 
-    public class StartClockEvent : UnityEvent<StartClockEventData>{}
+    public class ConfigureClockEvent : UnityEvent<ConfigureClockEventData>{}
+    public class ChangePlayerEvent : UnityEvent<PlayerPieces>{}
     
-    public struct StartClockEventData
+    public readonly struct ConfigureClockEventData
     {
-        public int ClockTime { get; set; }
-        public int ExtraTime { get; set; }
+        public int ClockTime { get; }
+        public int ExtraTime { get; }
 
-        public StartClockEventData(int clockTime, int extraTime)
+        public ConfigureClockEventData(int clockTime, int extraTime)
         {
             this.ClockTime = clockTime;
             this.ExtraTime = extraTime;

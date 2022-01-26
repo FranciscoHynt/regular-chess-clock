@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Enum;
 using Events;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Timer
 {
     public class TimerController : MonoBehaviour
     {
+        [SerializeField] private PlayerPieces pieceColor;
+
         private TimeSpan clockTime;
         private TextMeshProUGUI timerText;
 
@@ -15,7 +18,8 @@ namespace Timer
 
         public TimerController()
         {
-            ClockEvents.StartClockEvent.AddListener(StartTimer);
+            ClockEvents.ConfigureClockEvent.AddListener(SetTimer);
+            ClockEvents.ChangePlayerEvent.AddListener(HandleClock);
         }
 
         private void Awake()
@@ -23,11 +27,21 @@ namespace Timer
             timerText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        private void StartTimer(StartClockEventData data)
+        private void SetTimer(ConfigureClockEventData data)
         {
             clockTime = TimeSpan.FromMinutes(data.ClockTime);
+        }
 
-            StartCoroutine(RunTimerRoutine());
+        private void HandleClock(PlayerPieces playerOnClock)
+        {
+            if (pieceColor == playerOnClock)
+            {
+                StartCoroutine(RunTimerRoutine());
+            }
+            else
+            {
+                StopAllCoroutines();
+            }
         }
 
         private IEnumerator RunTimerRoutine()
