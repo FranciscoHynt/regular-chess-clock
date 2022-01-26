@@ -22,7 +22,7 @@ namespace Main
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && currentClockState == ClockState.Play)
             {
                 ChangePlayerOnClock();
             }
@@ -61,13 +61,27 @@ namespace Main
             }
         }
 
+        public void ResetClock()
+        {
+            currentClockState = ClockState.Pause;
+            currentPlayerOnClock = PlayerPieces.White;
+            
+            ClockEvents.PauseClockEvent.Invoke();
+            SetClockData();
+        }
+        
         public void StartClock()
+        {
+            SetClockData();
+            ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
+        }
+
+        private void SetClockData()
         {
             int clockTime = int.Parse(clockTimeInputField.text);
             int extraSeconds = int.Parse(extraTimeInputField.text);
 
             ClockEvents.ConfigureClockEvent.Invoke(new ConfigureClockEventData(clockTime, extraSeconds));
-            ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
         }
     }
 }
