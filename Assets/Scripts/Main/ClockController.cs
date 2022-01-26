@@ -12,6 +12,7 @@ namespace Main
         [SerializeField] private InputField extraTimeInputField;
 
         private PlayerPieces currentPlayerOnClock;
+        private ClockState currentClockState;
 
         private void Awake()
         {
@@ -40,6 +41,24 @@ namespace Main
                 : PlayerPieces.White;
 
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
+        }
+
+        public void PlayPauseClock()
+        {
+            switch (currentClockState)
+            {
+                case ClockState.Play:
+                    ClockEvents.PauseClockEvent.Invoke();
+                    currentClockState = ClockState.Pause;
+                    break;
+                case ClockState.Pause:
+                    ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
+                    currentClockState = ClockState.Play;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(currentClockState), currentClockState,
+                        "ClockState not implemented");
+            }
         }
 
         public void StartClock()

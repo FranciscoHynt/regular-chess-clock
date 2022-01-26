@@ -12,6 +12,7 @@ namespace Timer
         [SerializeField] private PlayerPieces pieceColor;
 
         private int extraSeconds;
+        private bool isClockRunning;
         private TimeSpan clockTime;
         private TextMeshProUGUI timerText;
 
@@ -21,7 +22,8 @@ namespace Timer
         public TimerController()
         {
             ClockEvents.ConfigureClockEvent.AddListener(SetTimer);
-            ClockEvents.ChangePlayerEvent.AddListener(HandleClock);
+            ClockEvents.ChangePlayerEvent.AddListener(HandleClockTime);
+            ClockEvents.PauseClockEvent.AddListener(ClockPause);
         }
 
         private void Awake()
@@ -36,21 +38,28 @@ namespace Timer
             UpdateTimerText();
         }
 
-        private void HandleClock(PlayerPieces playerOnClock)
+        private void HandleClockTime(PlayerPieces playerOnClock)
         {
             if (pieceColor == playerOnClock)
             {
                 StartCoroutine(RunTimerRoutine());
             }
-            else
+            else if (isClockRunning)
             {
                 AddExtraTime();
                 StopAllCoroutines();
             }
         }
 
+        private void ClockPause()
+        {
+            isClockRunning = false;
+            StopAllCoroutines();
+        }
+
         private IEnumerator RunTimerRoutine()
         {
+            isClockRunning = true;
             WaitForSeconds wait = new WaitForSeconds(0.1f);
 
             while (clockTime.TotalSeconds > 0)
@@ -59,6 +68,8 @@ namespace Timer
                 clockTime = GetClockTime();
                 yield return wait;
             }
+
+            isClockRunning = false;
         }
 
         private TimeSpan GetClockTime()
@@ -77,7 +88,11 @@ namespace Timer
 
         private void UpdateTimerText()
         {
-            timerText.text = clockTime.ToString(clockTime.TotalMinutes >= 1 ? DATE_FORMAT_MINUTES : DATE_FORMAT_MS);
+            string clockFormat = clockTime.TotalMinutes >= 1
+                ? DATE_FORMAT_MINUTES
+                : DATE_FORMAT_MS;
+
+            timerText.text = clockTime.ToString(clockFormat);
         }
     }
 }
