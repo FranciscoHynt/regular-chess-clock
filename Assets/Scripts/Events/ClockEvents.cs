@@ -15,12 +15,12 @@ namespace Events
     public readonly struct ConfigureClockEventData
     {
         public int ClockTime { get; }
-        public int ExtraTime { get; }
+        public int ExtraSeconds { get; }
 
-        public ConfigureClockEventData(int clockTime, int extraTime)
+        public ConfigureClockEventData(int clockTime, int extraSeconds)
         {
             this.ClockTime = clockTime;
-            this.ExtraTime = extraTime;
+            this.ExtraSeconds = extraSeconds;
         }
     }
 }

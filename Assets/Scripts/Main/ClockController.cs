@@ -29,7 +29,7 @@ namespace Main
 
         private void Start()
         {
-            ClockEvents.ConfigureClockEvent.Invoke(new ConfigureClockEventData(3, 0));
+            ClockEvents.ConfigureClockEvent.Invoke(new ConfigureClockEventData(1, 3));
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
         }
 
@@ -45,9 +45,9 @@ namespace Main
         public void StartClock()
         {
             int clockTime = int.Parse(clockTimeInputField.text);
-            int extraTime = int.Parse(extraTimeInputField.text);
+            int extraSeconds = int.Parse(extraTimeInputField.text);
 
-            ClockEvents.ConfigureClockEvent.Invoke(new ConfigureClockEventData(clockTime, extraTime));
+            ClockEvents.ConfigureClockEvent.Invoke(new ConfigureClockEventData(clockTime, extraSeconds));
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
         }
     }

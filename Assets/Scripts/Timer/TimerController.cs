@@ -11,10 +11,12 @@ namespace Timer
     {
         [SerializeField] private PlayerPieces pieceColor;
 
+        private int extraSeconds;
         private TimeSpan clockTime;
         private TextMeshProUGUI timerText;
 
-        private const string DATE_FORMAT = @"mm\:ss";
+        private const string DATE_FORMAT_MS = @"ss\.f";
+        private const string DATE_FORMAT_MINUTES = @"mm\:ss";
 
         public TimerController()
         {
@@ -29,7 +31,9 @@ namespace Timer
 
         private void SetTimer(ConfigureClockEventData data)
         {
+            extraSeconds = data.ExtraSeconds;
             clockTime = TimeSpan.FromMinutes(data.ClockTime);
+            UpdateTimerText();
         }
 
         private void HandleClock(PlayerPieces playerOnClock)
@@ -40,15 +44,16 @@ namespace Timer
             }
             else
             {
+                AddExtraTime();
                 StopAllCoroutines();
             }
         }
 
         private IEnumerator RunTimerRoutine()
         {
-            WaitForSeconds wait = new WaitForSeconds(1);
+            WaitForSeconds wait = new WaitForSeconds(0.1f);
 
-            while (true)
+            while (clockTime.TotalSeconds > 0)
             {
                 UpdateTimerText();
                 clockTime = GetClockTime();
@@ -58,12 +63,21 @@ namespace Timer
 
         private TimeSpan GetClockTime()
         {
-            return clockTime.Subtract(TimeSpan.FromSeconds(1));
+            return clockTime.Subtract(TimeSpan.FromSeconds(0.1f));
+        }
+
+        private void AddExtraTime()
+        {
+            if (extraSeconds > 0)
+            {
+                clockTime = clockTime.Add(TimeSpan.FromSeconds(extraSeconds));
+                UpdateTimerText();
+            }
         }
 
         private void UpdateTimerText()
         {
-            timerText.text = clockTime.ToString(DATE_FORMAT);
+            timerText.text = clockTime.ToString(clockTime.TotalMinutes >= 1 ? DATE_FORMAT_MINUTES : DATE_FORMAT_MS);
         }
     }
 }
