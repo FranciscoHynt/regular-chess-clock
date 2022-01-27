@@ -1,5 +1,5 @@
 ﻿using System;
-using Enum;
+using Enumerators;
 using Events;
 using TMPro;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace Main
         [SerializeField] private TMP_InputField extraTimeInputField;
 
         private ClockState currentClockState;
-        private PlayerPieces currentPlayerOnClock;
+        private PlayerPiece currentPlayerOnClock;
 
         private void Awake()
         {
@@ -27,16 +27,7 @@ namespace Main
                 ChangePlayerOnClock();
             }
         }
-
-        private void ChangePlayerOnClock()
-        {
-            currentPlayerOnClock = currentPlayerOnClock == PlayerPieces.White
-                ? PlayerPieces.Black
-                : PlayerPieces.White;
-
-            ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
-        }
-
+        
         public void PlayPauseClock()
         {
             switch (currentClockState)
@@ -58,10 +49,10 @@ namespace Main
         public void ResetClock()
         {
             currentClockState = ClockState.Pause;
-            currentPlayerOnClock = PlayerPieces.White;
+            currentPlayerOnClock = PlayerPiece.White;
 
-            ClockEvents.PauseClockEvent.Invoke();
             SetClockData();
+            ClockEvents.PauseClockEvent.Invoke();
         }
 
         public void StartClock()
@@ -69,13 +60,22 @@ namespace Main
             SetClockData();
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
         }
-
+        
         private void SetClockData()
         {
             int clockTime = int.Parse(clockTimeInputField.text);
             int extraSeconds = int.Parse(extraTimeInputField.text);
 
             ClockEvents.ConfigureClockEvent.Invoke(new ConfigureClockEventData(clockTime, extraSeconds));
+        }
+        
+        private void ChangePlayerOnClock()
+        {
+            currentPlayerOnClock = currentPlayerOnClock == PlayerPiece.White
+                ? PlayerPiece.Black
+                : PlayerPiece.White;
+
+            ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
         }
     }
 }

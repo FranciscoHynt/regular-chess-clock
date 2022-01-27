@@ -1,4 +1,4 @@
-﻿namespace Enum
+﻿namespace Enumerators
 {
     public enum ClockState
     {

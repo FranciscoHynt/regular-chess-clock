@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Enum;
+using Enumerators;
 using Events;
 using TMPro;
 using UnityEngine;
@@ -9,7 +9,7 @@ namespace Timer
 {
     public class TimerController : MonoBehaviour
     {
-        [SerializeField] private PlayerPieces pieceColor;
+        [SerializeField] private PlayerPiece pieceColor;
 
         private int extraSeconds;
         private bool isClockRunning;
@@ -39,7 +39,7 @@ namespace Timer
             UpdateTimerText();
         }
 
-        private void HandleClockTime(PlayerPieces playerOnClock)
+        private void HandleClockTime(PlayerPiece playerOnClock)
         {
             if (pieceColor == playerOnClock)
             {

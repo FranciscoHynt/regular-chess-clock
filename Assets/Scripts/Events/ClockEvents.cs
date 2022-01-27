@@ -1,4 +1,4 @@
-﻿using Enum;
+﻿using Enumerators;
 using UnityEngine.Events;
 
 namespace Events
@@ -12,7 +12,7 @@ namespace Events
 
     public class PauseClockEvent : UnityEvent{}
     public class ConfigureClockEvent : UnityEvent<ConfigureClockEventData>{}
-    public class ChangePlayerEvent : UnityEvent<PlayerPieces>{}
+    public class ChangePlayerEvent : UnityEvent<PlayerPiece>{}
 
     public readonly struct ConfigureClockEventData
     {
