@@ -35,6 +35,7 @@ namespace Timer
         {
             extraSeconds = data.ExtraSeconds;
             clockTime = TimeSpan.FromMinutes(data.ClockTime);
+            
             UpdateTimerText();
         }
 

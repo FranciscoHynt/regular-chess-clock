@@ -1,23 +1,23 @@
 ﻿using System;
 using Enum;
 using Events;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Main
 {
     public class ClockController : MonoBehaviour
     {
-        [SerializeField] private InputField clockTimeInputField;
-        [SerializeField] private InputField extraTimeInputField;
+        [SerializeField] private TMP_InputField clockTimeInputField;
+        [SerializeField] private TMP_InputField extraTimeInputField;
 
-        private PlayerPieces currentPlayerOnClock;
         private ClockState currentClockState;
+        private PlayerPieces currentPlayerOnClock;
 
         private void Awake()
         {
-            // clockTimeInputField.characterValidation = InputField.CharacterValidation.Integer;
-            // extraTimeInputField.characterValidation = InputField.CharacterValidation.Integer;
+            clockTimeInputField.characterValidation = TMP_InputField.CharacterValidation.Integer;
+            extraTimeInputField.characterValidation = TMP_InputField.CharacterValidation.Integer;
         }
 
         private void Update()
@@ -26,12 +26,6 @@ namespace Main
             {
                 ChangePlayerOnClock();
             }
-        }
-
-        private void Start()
-        {
-            ClockEvents.ConfigureClockEvent.Invoke(new ConfigureClockEventData(1, 3));
-            ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
         }
 
         private void ChangePlayerOnClock()
@@ -65,11 +59,11 @@ namespace Main
         {
             currentClockState = ClockState.Pause;
             currentPlayerOnClock = PlayerPieces.White;
-            
+
             ClockEvents.PauseClockEvent.Invoke();
             SetClockData();
         }
-        
+
         public void StartClock()
         {
             SetClockData();
