@@ -2,17 +2,22 @@ using System;
 using System.Collections;
 using Enumerators;
 using Events;
+using Settings;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Timer
 {
     public class TimerController : MonoBehaviour
     {
         [SerializeField] private PlayerPiece pieceColor;
+        [SerializeField] private TimerSettings timerSettings;
 
         private int extraSeconds;
+        private int clockMaxSeconds;
         private bool isClockRunning;
+        private Image timerBackground;
         private TimeSpan clockTime;
         private TextMeshProUGUI timerText;
 
@@ -30,13 +35,16 @@ namespace Timer
         private void Awake()
         {
             timerText = GetComponentInChildren<TextMeshProUGUI>();
+            timerBackground = GetComponentInChildren<Image>();
         }
 
         private void SetTimer(ConfigureClockEventData data)
         {
             extraSeconds = data.ExtraSeconds;
             clockTime = TimeSpan.FromMinutes(data.ClockTime);
-            
+            clockMaxSeconds = (int)clockTime.TotalSeconds;
+
+            UpdateTimerColor();
             UpdateTimerText();
         }
 
@@ -59,21 +67,6 @@ namespace Timer
             StopAllCoroutines();
         }
 
-        private IEnumerator RunTimerRoutine()
-        {
-            isClockRunning = true;
-            WaitForSeconds wait = new WaitForSeconds(0.1f);
-
-            while (clockTime.TotalSeconds > 0)
-            {
-                UpdateTimerText();
-                clockTime = GetClockTime();
-                yield return wait;
-            }
-
-            isClockRunning = false;
-        }
-
         private TimeSpan GetClockTime()
         {
             return clockTime.Subtract(TimeSpan.FromSeconds(0.1f));
@@ -81,11 +74,10 @@ namespace Timer
 
         private void AddExtraTime()
         {
-            if (extraSeconds > 0)
-            {
-                clockTime = clockTime.Add(TimeSpan.FromSeconds(extraSeconds));
-                UpdateTimerText();
-            }
+            if (extraSeconds <= 0) return;
+            
+            clockTime = clockTime.Add(TimeSpan.FromSeconds(extraSeconds));
+            UpdateTimerText();
         }
 
         private void UpdateTimerText()
@@ -98,6 +90,29 @@ namespace Timer
                 clockFormat = DATE_FORMAT_HOURS;
 
             timerText.text = clockTime.ToString(clockFormat);
+        }
+
+        private void UpdateTimerColor()
+        {
+            float time = (float)clockTime.TotalSeconds / clockMaxSeconds;
+            Color currentColor = timerSettings.colors.Evaluate(time);
+            timerBackground.color = currentColor;
+        }
+        
+        private IEnumerator RunTimerRoutine()
+        {
+            isClockRunning = true;
+            WaitForSeconds wait = new WaitForSeconds(0.1f);
+
+            while (clockTime.TotalSeconds > 0)
+            {
+                UpdateTimerText();
+                UpdateTimerColor();
+                clockTime = GetClockTime();
+                yield return wait;
+            }
+
+            isClockRunning = false;
         }
     }
 }

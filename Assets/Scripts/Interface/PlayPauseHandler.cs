@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Interface
 {
-    public class PlayPauseImageHandler : MonoBehaviour
+    public class PlayPauseHandler : MonoBehaviour
     {
         [SerializeField] private Animator playAnimator;
         [SerializeField] private Animator pauseAnimator;
@@ -13,7 +13,7 @@ namespace Interface
         private const string WINDOW_IN = "WindowIn";
         private const string WINDOW_OUT = "WindowOut";
 
-        public PlayPauseImageHandler()
+        public PlayPauseHandler()
         {
             ClockEvents.ChangeClockStateEvent.AddListener(ClockChangeState);
         }
