@@ -17,6 +17,7 @@ namespace Timer
         private TextMeshProUGUI timerText;
 
         private const string DATE_FORMAT_MS = @"ss\.f";
+        private const string DATE_FORMAT_HOURS = @"hh\:mm\:ss";
         private const string DATE_FORMAT_MINUTES = @"mm\:ss";
 
         public TimerController()
@@ -92,6 +93,9 @@ namespace Timer
             string clockFormat = clockTime.TotalMinutes >= 1
                 ? DATE_FORMAT_MINUTES
                 : DATE_FORMAT_MS;
+
+            if (clockTime.TotalHours >= 1)
+                clockFormat = DATE_FORMAT_HOURS;
 
             timerText.text = clockTime.ToString(clockFormat);
         }
