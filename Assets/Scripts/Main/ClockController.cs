@@ -27,7 +27,7 @@ namespace Main
                 ChangePlayerOnClock();
             }
         }
-        
+
         public void PlayPauseClock()
         {
             switch (currentClockState)
@@ -44,6 +44,8 @@ namespace Main
                     throw new ArgumentOutOfRangeException(nameof(currentClockState), currentClockState,
                         "ClockState not implemented");
             }
+
+            ClockEvents.ChangeClockStateEvent.Invoke(currentClockState);
         }
 
         public void ResetClock()
@@ -53,14 +55,16 @@ namespace Main
 
             SetClockData();
             ClockEvents.PauseClockEvent.Invoke();
+            ClockEvents.ChangeClockStateEvent.Invoke(currentClockState);
         }
 
         public void StartClock()
         {
             SetClockData();
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
+            ClockEvents.ChangeClockStateEvent.Invoke(currentClockState);
         }
-        
+
         private void SetClockData()
         {
             int clockTime = int.Parse(clockTimeInputField.text);
@@ -68,7 +72,7 @@ namespace Main
 
             ClockEvents.ConfigureClockEvent.Invoke(new ConfigureClockEventData(clockTime, extraSeconds));
         }
-        
+
         private void ChangePlayerOnClock()
         {
             currentPlayerOnClock = currentPlayerOnClock == PlayerPiece.White

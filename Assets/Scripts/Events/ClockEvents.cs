@@ -8,11 +8,13 @@ namespace Events
         public static readonly PauseClockEvent PauseClockEvent = new PauseClockEvent();
         public static readonly ConfigureClockEvent ConfigureClockEvent = new ConfigureClockEvent();
         public static readonly ChangePlayerEvent ChangePlayerEvent = new ChangePlayerEvent();
+        public static readonly ChangeClockStateEvent ChangeClockStateEvent = new ChangeClockStateEvent();
     }
 
     public class PauseClockEvent : UnityEvent{}
     public class ConfigureClockEvent : UnityEvent<ConfigureClockEventData>{}
     public class ChangePlayerEvent : UnityEvent<PlayerPiece>{}
+    public class ChangeClockStateEvent : UnityEvent<ClockState>{}
 
     public readonly struct ConfigureClockEventData
     {
