@@ -41,3 +41,13 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
+  timersData:
+  - fontSize: 227
+    dateFormat: hh\:mm\:ss
+    clockTimeState: 1
+  - fontSize: 300
+    dateFormat: mm\:ss
+    clockTimeState: 2
+  - fontSize: 380
+    dateFormat: ss\.f
+    clockTimeState: 3

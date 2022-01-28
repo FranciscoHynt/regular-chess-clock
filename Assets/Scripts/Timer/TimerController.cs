@@ -20,7 +20,7 @@ namespace Timer
         private Image timerBackground;
         private TimeSpan clockTime;
         private TextMeshProUGUI timerText;
-
+        
         private const string DATE_FORMAT_MS = @"ss\.f";
         private const string DATE_FORMAT_HOURS = @"hh\:mm\:ss";
         private const string DATE_FORMAT_MINUTES = @"mm\:ss";
@@ -82,14 +82,16 @@ namespace Timer
 
         private void UpdateTimerText()
         {
-            string clockFormat = clockTime.TotalMinutes >= 1
-                ? DATE_FORMAT_MINUTES
-                : DATE_FORMAT_MS;
+            ClockTimeState timeState = clockTime.TotalMinutes >= 1
+                ? ClockTimeState.Minutes
+                : ClockTimeState.Seconds;
 
             if (clockTime.TotalHours >= 1)
-                clockFormat = DATE_FORMAT_HOURS;
-
-            timerText.text = clockTime.ToString(clockFormat);
+                timeState = ClockTimeState.Hours;
+            
+            ClockTimerData clockTimerData = timerSettings.GetClockTimerData(timeState);
+            timerText.text = clockTime.ToString(@clockTimerData.dateFormat);
+            timerText.fontSize = clockTimerData.fontSize;
         }
 
         private void UpdateTimerColor()
