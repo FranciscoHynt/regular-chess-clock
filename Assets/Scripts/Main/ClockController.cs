@@ -60,6 +60,7 @@ namespace Main
             SetClockData();
             ClockEvents.PauseClockEvent.Invoke();
             ClockEvents.ChangeClockStateEvent.Invoke(currentClockState);
+            InGameSoundManager.StopLoopSound();
             InGameSoundManager.PlaySound(SingleSound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
         }
 
