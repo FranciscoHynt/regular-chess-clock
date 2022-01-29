@@ -11,19 +11,15 @@ namespace Timer
 {
     public class TimerController : MonoBehaviour
     {
-        [SerializeField] private PlayerPiece pieceColor;
+        [SerializeField] private Image timerBackground;
         [SerializeField] private TimerSettings timerSettings;
+        [SerializeField] private PlayerPiece pieceColor;
 
         private int extraSeconds;
         private int clockMaxSeconds;
         private bool isClockRunning;
-        private Image timerBackground;
         private TimeSpan clockTime;
         private TextMeshProUGUI timerText;
-        
-        private const string DATE_FORMAT_MS = @"ss\.f";
-        private const string DATE_FORMAT_HOURS = @"hh\:mm\:ss";
-        private const string DATE_FORMAT_MINUTES = @"mm\:ss";
 
         public TimerController()
         {
@@ -35,7 +31,6 @@ namespace Timer
         private void Awake()
         {
             timerText = GetComponentInChildren<TextMeshProUGUI>();
-            timerBackground = GetComponentInChildren<Image>();
         }
 
         private void SetTimer(ConfigureClockEventData data)
@@ -75,7 +70,7 @@ namespace Timer
         private void AddExtraTime()
         {
             if (extraSeconds <= 0) return;
-            
+
             clockTime = clockTime.Add(TimeSpan.FromSeconds(extraSeconds));
             UpdateTimerText();
         }
@@ -88,9 +83,9 @@ namespace Timer
 
             if (clockTime.TotalHours >= 1)
                 timeState = ClockTimeState.Hours;
-            
+
             ClockTimerData clockTimerData = timerSettings.GetClockTimerData(timeState);
-            timerText.text = clockTime.ToString(@clockTimerData.dateFormat);
+            timerText.text = clockTime.ToString(clockTimerData.dateFormat);
             timerText.fontSize = clockTimerData.fontSize;
         }
 
@@ -100,7 +95,7 @@ namespace Timer
             Color currentColor = timerSettings.colors.Evaluate(time);
             timerBackground.color = currentColor;
         }
-        
+
         private IEnumerator RunTimerRoutine()
         {
             isClockRunning = true;
