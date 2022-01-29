@@ -110,6 +110,10 @@ namespace Timer
             }
 
             isClockRunning = false;
+            UpdateTimerText();
+            UpdateTimerColor();
+
+            ClockEvents.ClockTimeEndedEvent.Invoke(pieceColor == PlayerPiece.Black ? PlayerPiece.White : PlayerPiece.Black);
         }
     }
 }
