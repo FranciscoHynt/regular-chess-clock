@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c8d87b40514d13b8bf50611879005f, type: 3}
   m_Name: SoundSettings
   m_EditorClassIdentifier: 
-  buttonClick: 1
-  clockChange: 1
+  buttonClick: 0.4
+  clockChange: 0.8
   clockEndTime: 1
   clockTick: 1

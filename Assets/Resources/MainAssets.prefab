@@ -49,11 +49,11 @@ MonoBehaviour:
   soundClipsList:
   - singleSound: 0
     audioClip: {fileID: 8300000, guid: 0d563fc1ec44c8a47bab6f69f8ed8334, type: 3}
-  - singleSound: 0
+  - singleSound: 1
     audioClip: {fileID: 8300000, guid: 0542c56098265404994b09fcbe5a9354, type: 3}
-  - singleSound: 0
+  - singleSound: 2
     audioClip: {fileID: 8300000, guid: 2e434da3934eb254b985f2a55cf379d1, type: 3}
   loopSoundAudioClips:
   - loopSound: 0
-    audioClip: {fileID: 8300000, guid: bec1b3c770d8d4745b53cf4939fc89d2, type: 3}
+    audioClip: {fileID: 8300000, guid: b83b2d18bb3c9284393a57f350556f01, type: 3}
   soundMixer: {fileID: 24100000, guid: a52977f654d73df4ea561e103af8af8d, type: 2}
