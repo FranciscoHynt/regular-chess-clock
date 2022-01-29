@@ -38,6 +38,8 @@ namespace Interface
             Enum.TryParse(panelName, out InterfacePanel menuPlace);
             GetPanelAnimators(menuPlace).Play(WINDOW_OUT);
             GetPanelAnimators(InterfacePanel.Home).Play(WINDOW_IN);
+
+            currentPanel = InterfacePanel.Home;
         }
 
         private Animator GetPanelAnimators(InterfacePanel panel)
