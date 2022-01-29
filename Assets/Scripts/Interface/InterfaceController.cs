@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets;
 using Enumerators;
 using Events;
+using Sounds;
 using UnityEngine;
 
 namespace Interface
@@ -28,6 +30,7 @@ namespace Interface
             GetPanelAnimators(currentPanel).Play(WINDOW_OUT);
 
             currentPanel = menuPlace;
+            InGameSoundManager.PlaySound(Sound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
         }
 
         public void DisablePanel(String panelName)

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using Assets;
 using Enumerators;
 using Events;
 using Settings;
+using Sounds;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -114,6 +116,7 @@ namespace Timer
             UpdateTimerColor();
 
             ClockEvents.ClockTimeEndedEvent.Invoke(pieceColor == PlayerPiece.Black ? PlayerPiece.White : PlayerPiece.Black);
+            InGameSoundManager.PlaySound(Sound.ClockEndTime, MainAssets.I.soundSettings.clockEndTime);
         }
     }
 }

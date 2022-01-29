@@ -1,6 +1,8 @@
 ﻿using System;
+using Assets;
 using Enumerators;
 using Events;
+using Sounds;
 using TMPro;
 using UnityEngine;
 
@@ -56,6 +58,7 @@ namespace Main
             SetClockData();
             ClockEvents.PauseClockEvent.Invoke();
             ClockEvents.ChangeClockStateEvent.Invoke(currentClockState);
+            InGameSoundManager.PlaySound(Sound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
         }
 
         public void StartClock()
@@ -63,6 +66,7 @@ namespace Main
             SetClockData();
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
             ClockEvents.ChangeClockStateEvent.Invoke(currentClockState);
+            InGameSoundManager.PlaySound(Sound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
         }
 
         private void SetClockData()
@@ -80,6 +84,7 @@ namespace Main
                 : PlayerPiece.White;
 
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
+            InGameSoundManager.PlaySound(Sound.ClockChange, MainAssets.I.soundSettings.clockChange);
         }
     }
 }
