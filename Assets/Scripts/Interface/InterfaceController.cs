@@ -30,7 +30,7 @@ namespace Interface
             GetPanelAnimators(currentPanel).Play(WINDOW_OUT);
 
             currentPanel = menuPlace;
-            InGameSoundManager.PlaySound(Sound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
+            InGameSoundManager.PlaySound(SingleSound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
         }
 
         public void DisablePanel(String panelName)

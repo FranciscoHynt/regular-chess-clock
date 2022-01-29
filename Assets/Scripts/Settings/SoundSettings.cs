@@ -9,5 +9,7 @@ namespace Settings
         [Range(0, 1)] public float buttonClick;
         [Range(0, 1)] public float clockChange;
         [Range(0, 1)] public float clockEndTime;
+        [Header("LoopSounds")]
+        [Range(0, 1)] public float clockTick;
     }
 }

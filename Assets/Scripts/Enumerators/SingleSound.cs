@@ -1,6 +1,6 @@
 ﻿namespace Enumerators
 {
-    public enum Sound
+    public enum SingleSound
     {
         ButtonClick = 0,
         ClockChange = 1,

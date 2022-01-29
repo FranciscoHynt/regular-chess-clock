@@ -32,7 +32,7 @@ namespace Assets
 
         [Header("Sounds")] 
         public List<SoundAudioClip> soundClipsList;
-        // public List<MusicAudioClip> musicAudioClips;
+        public List<LoopSoundAudioClip> loopSoundAudioClips;
 
         [Header("Mixer")] 
         public AudioMixer soundMixer;
@@ -41,15 +41,15 @@ namespace Assets
         [Serializable]
         public class SoundAudioClip
         {
-            public Sound sound;
+            public SingleSound singleSound;
             public AudioClip audioClip;
         }
 
-        // [System.Serializable]
-        // public class MusicAudioClip
-        // {
-        //     public InGameSoundManager.Music music;
-        //     public AudioClip audioClip;
-        // }
+        [Serializable]
+        public class LoopSoundAudioClip
+        {
+            public LoopSound loopSound;
+            public AudioClip audioClip;
+        }
     }
 }

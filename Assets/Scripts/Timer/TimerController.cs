@@ -116,7 +116,7 @@ namespace Timer
             UpdateTimerColor();
 
             ClockEvents.ClockTimeEndedEvent.Invoke(pieceColor == PlayerPiece.Black ? PlayerPiece.White : PlayerPiece.Black);
-            InGameSoundManager.PlaySound(Sound.ClockEndTime, MainAssets.I.soundSettings.clockEndTime);
+            InGameSoundManager.PlaySound(SingleSound.ClockEndTime, MainAssets.I.soundSettings.clockEndTime);
         }
     }
 }

@@ -37,10 +37,12 @@ namespace Main
                 case ClockState.Play:
                     ClockEvents.PauseClockEvent.Invoke();
                     currentClockState = ClockState.Pause;
+                    InGameSoundManager.StopLoopSound();
                     break;
                 case ClockState.Pause:
                     ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
                     currentClockState = ClockState.Play;
+                    InGameSoundManager.PlayLoopSound(LoopSound.ClockTick, MainAssets.I.soundSettings.clockTick);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(currentClockState), currentClockState,
@@ -58,7 +60,7 @@ namespace Main
             SetClockData();
             ClockEvents.PauseClockEvent.Invoke();
             ClockEvents.ChangeClockStateEvent.Invoke(currentClockState);
-            InGameSoundManager.PlaySound(Sound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
+            InGameSoundManager.PlaySound(SingleSound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
         }
 
         public void StartClock()
@@ -66,7 +68,8 @@ namespace Main
             SetClockData();
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
             ClockEvents.ChangeClockStateEvent.Invoke(currentClockState);
-            InGameSoundManager.PlaySound(Sound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
+            InGameSoundManager.PlaySound(SingleSound.ButtonClick, MainAssets.I.soundSettings.buttonClick);
+            InGameSoundManager.PlayLoopSound(LoopSound.ClockTick, MainAssets.I.soundSettings.clockTick);
         }
 
         private void SetClockData()
@@ -84,7 +87,7 @@ namespace Main
                 : PlayerPiece.White;
 
             ClockEvents.ChangePlayerEvent.Invoke(currentPlayerOnClock);
-            InGameSoundManager.PlaySound(Sound.ClockChange, MainAssets.I.soundSettings.clockChange);
+            InGameSoundManager.PlaySound(SingleSound.ClockChange, MainAssets.I.soundSettings.clockChange);
         }
     }
 }

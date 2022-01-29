@@ -47,10 +47,13 @@ MonoBehaviour:
   soundSettings: {fileID: 11400000, guid: 678123f61465e7b4db5da44286c7587f, type: 2}
   soundObject: {fileID: 1766437937914916804, guid: 7d065a0ee69ef2246afa14a8e4258c6e, type: 3}
   soundClipsList:
-  - sound: 0
+  - singleSound: 0
     audioClip: {fileID: 8300000, guid: 0d563fc1ec44c8a47bab6f69f8ed8334, type: 3}
-  - sound: 1
+  - singleSound: 0
     audioClip: {fileID: 8300000, guid: 0542c56098265404994b09fcbe5a9354, type: 3}
-  - sound: 2
+  - singleSound: 0
     audioClip: {fileID: 8300000, guid: 2e434da3934eb254b985f2a55cf379d1, type: 3}
+  loopSoundAudioClips:
+  - loopSound: 0
+    audioClip: {fileID: 8300000, guid: bec1b3c770d8d4745b53cf4939fc89d2, type: 3}
   soundMixer: {fileID: 24100000, guid: a52977f654d73df4ea561e103af8af8d, type: 2}
