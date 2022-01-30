@@ -41,7 +41,7 @@ namespace Timer
             clockTime = TimeSpan.FromMinutes(data.ClockTime);
             clockMaxSeconds = (int)clockTime.TotalSeconds;
 
-            UpdateTimerColor();
+            // UpdateTimerColor();
             UpdateTimerText();
         }
 
@@ -54,6 +54,7 @@ namespace Timer
             else if (isClockRunning)
             {
                 AddExtraTime();
+                DisableClock();
                 StopAllCoroutines();
             }
         }
@@ -67,6 +68,11 @@ namespace Timer
         private TimeSpan GetClockTime()
         {
             return clockTime.Subtract(TimeSpan.FromSeconds(0.1f));
+        }
+
+        private void DisableClock()
+        {
+            timerBackground.color = Color.gray;
         }
 
         private void AddExtraTime()

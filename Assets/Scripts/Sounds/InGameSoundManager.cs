@@ -44,7 +44,8 @@ namespace Sounds
 
         public static void StopLoopSound()
         {
-            currentLoopSound.ReturnToPool();
+            if(currentLoopSound)
+                currentLoopSound.ReturnToPool();
         }
 
         public static void PlayLoopSound(LoopSound singleSound, float volume)
