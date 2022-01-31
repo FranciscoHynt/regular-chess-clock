@@ -1,5 +1,7 @@
-<h1 align="center">Hi 👋, I'm Francisco Sampaio</h1>
-<h3 align="center">Open-source chess clock</h3>
+<h2 align="center">Hi 👋, I'm Francisco Sampaio</h2>
+<h3 align="center">Open-source chess clock made with Unity3D</h3>
+
+- 🕹️ Link to use/download the tool [here](https://franciscohynt.itch.io/regular-chess-clock).
 
 - 💬 This project is a study case, I'm learning Unity3D for over 3 years.
 
