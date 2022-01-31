@@ -11,7 +11,7 @@ namespace Interface
 {
     public class InterfaceController : MonoBehaviour
     {
-        [SerializeField] private List<PanelData> panelDatas;
+        [SerializeField] private List<PanelData> panelsData;
 
         private InterfacePanel currentPanel;
         
@@ -44,7 +44,7 @@ namespace Interface
 
         private Animator GetPanelAnimators(InterfacePanel panel)
         {
-            return panelDatas.First(data => data.id == panel).animator;
+            return panelsData.First(data => data.id == panel).animator;
         }
     }
 

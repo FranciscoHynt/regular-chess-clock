@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Interface
+namespace Utils
 {
     [AddComponentMenu("UI/Effects/StepShadow")]
     public class StepShadow : BaseMeshEffect

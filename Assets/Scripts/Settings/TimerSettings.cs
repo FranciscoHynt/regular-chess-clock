@@ -9,6 +9,7 @@ namespace Settings
     [CreateAssetMenu(fileName = "TimerColorSettings", menuName = "Settings/Timer Color Settings", order = 0)]
     public class TimerSettings : ScriptableObject
     {
+        public float timeStep;
         public Gradient colors;
         public List<ClockTimerData> timersData;
 

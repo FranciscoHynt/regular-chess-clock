@@ -40,8 +40,7 @@ namespace Timer
             extraSeconds = data.ExtraSeconds;
             clockTime = TimeSpan.FromMinutes(data.ClockTime);
             clockMaxSeconds = (int)clockTime.TotalSeconds;
-
-            // UpdateTimerColor();
+            
             UpdateTimerText();
         }
 
@@ -67,7 +66,7 @@ namespace Timer
 
         private TimeSpan GetClockTime()
         {
-            return clockTime.Subtract(TimeSpan.FromSeconds(0.1f));
+            return clockTime.Subtract(TimeSpan.FromSeconds(timerSettings.timeStep));
         }
 
         private void DisableClock()
@@ -107,7 +106,7 @@ namespace Timer
         private IEnumerator RunTimerRoutine()
         {
             isClockRunning = true;
-            WaitForSeconds wait = new WaitForSeconds(0.1f);
+            WaitForSeconds wait = new WaitForSeconds(timerSettings.timeStep);
 
             while (clockTime.TotalSeconds > 0)
             {

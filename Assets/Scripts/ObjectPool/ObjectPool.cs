@@ -9,8 +9,6 @@ namespace ObjectPool
         private PooledObject prefab;
         private readonly List<PooledObject> availableObjects = new List<PooledObject>();
 
-        private int i = 0;
-
         public PooledObject GetObject()
         {
             PooledObject obj;
@@ -24,9 +22,7 @@ namespace ObjectPool
             }
             else
             {
-                obj = Instantiate<PooledObject>(prefab);
-                i++;
-                obj.transform.SetParent(transform, false);
+                obj = Instantiate<PooledObject>(prefab, transform, false);
                 obj.Pool = this;
             }
 
