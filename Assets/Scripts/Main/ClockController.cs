@@ -16,6 +16,11 @@ namespace Main
         private ClockState currentClockState;
         private PlayerPiece currentPlayerOnClock;
 
+        public ClockController()
+        {
+            ClockEvents.ClockTimeEndedEvent.AddListener(arg => InGameSoundManager.StopLoopSound());
+        }
+
         private void Awake()
         {
             clockTimeInputField.characterValidation = TMP_InputField.CharacterValidation.Integer;

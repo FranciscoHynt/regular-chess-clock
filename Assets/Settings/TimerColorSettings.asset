@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca8870a063b4798aa1ac3a5ace48339, type: 3}
   m_Name: TimerColorSettings
   m_EditorClassIdentifier: 
+  timeStep: 0.1
   colors:
     serializedVersion: 2
     key0: {r: 1, g: 0.3882353, b: 0.3882353, a: 1}

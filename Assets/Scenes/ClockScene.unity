@@ -4192,7 +4192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c333c3605b44cab102a3bb2961186a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelDatas:
+  panelsData:
   - id: 0
     animator: {fileID: 1292533129}
   - id: 1
